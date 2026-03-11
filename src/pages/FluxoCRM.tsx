@@ -78,8 +78,8 @@ const FluxoCRM = () => {
             }));
 
             setStages(combinedStages);
-        } catch (error: any) {
-            console.error("Erro ao carregar dados do CRM:", error.message);
+        } catch (error) {
+            console.error("Erro ao carregar dados do CRM:", (error as Error).message);
             toast.error("Erro ao carregar estrutura do CRM.");
         } finally {
             setLoading(false);

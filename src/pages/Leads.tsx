@@ -52,8 +52,8 @@ const Leads = () => {
       if (deuErro) throw new Error("Falha na sincronização parcial");
 
       setLeads(todosLeads);
-    } catch (error: any) {
-      console.error("Erro ao carregar leads:", error.message);
+    } catch (error) {
+      console.error("Erro ao carregar leads:", (error as Error).message);
       toast.error("Erro ao conectar com a base do NEF Nexus.");
     } finally {
       setLoading(false);
@@ -88,7 +88,7 @@ const Leads = () => {
       );
     }
 
-    result.sort((a: any, b: any) => {
+    result.sort((a: Lead, b: Lead) => {
       const valA = String(a[sortField] || "");
       const valB = String(b[sortField] || "");
       return sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);

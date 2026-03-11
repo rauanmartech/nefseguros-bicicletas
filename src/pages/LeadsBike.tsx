@@ -53,8 +53,8 @@ const LeadsBike = () => {
             if (deuErro) throw new Error("Falha na sincronização");
 
             setLeads(todosLeads);
-        } catch (error: any) {
-            console.error("Erro ao carregar leads do site:", error.message);
+        } catch (error) {
+            console.error("Erro ao carregar leads do site:", (error as Error).message);
             toast.error("Erro ao conectar com a base de leads do site.");
         } finally {
             setLoading(false);
@@ -88,7 +88,7 @@ const LeadsBike = () => {
             );
         }
 
-        result.sort((a: any, b: any) => {
+        result.sort((a: LeadBike, b: LeadBike) => {
             let valA = a[sortField];
             let valB = b[sortField];
 

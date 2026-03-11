@@ -116,7 +116,7 @@ export const LeadCaptureModal: React.FC<LeadCaptureModalProps> = ({ isOpen, onCl
                 }, 500);
             }, 3000);
 
-        } catch (err: any) {
+        } catch (err) {
             console.error(err);
             setError('Ocorreu um erro ao enviar suas informações. Tente novamente.');
         } finally {

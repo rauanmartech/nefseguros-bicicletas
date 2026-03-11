@@ -32,7 +32,7 @@ const Dashboard = () => {
       }
 
       setLeads(todosLeads);
-    } catch (error: any) {
+    } catch (error) {
       toast.error("Erro ao sincronizar dashboard");
     } finally {
       setLoading(false);

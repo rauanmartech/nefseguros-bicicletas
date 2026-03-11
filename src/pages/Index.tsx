@@ -1559,21 +1559,4 @@ const Index = () => {
 };
 
 export default Index;
-                </li >
-              </ul >
-            </div >
-          </div >
-  <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between">
-    <p className="text-sm text-muted-foreground mb-4 md:mb-0">
-      © {new Date().getFullYear()} Nef Seguros. Todos os direitos reservados.
-    </p>
-  </div>
-        </div >
-      </footer >
 
-  <LeadCaptureModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-    </div >
-  );
-};
-
-export default Index;

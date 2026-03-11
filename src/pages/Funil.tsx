@@ -17,7 +17,7 @@ const Funil = () => {
 
       if (error) throw error;
       setLeads(data || []);
-    } catch (error: any) {
+    } catch (error) {
       toast.error("Erro ao carregar fontes");
     } finally {
       setLoading(false);

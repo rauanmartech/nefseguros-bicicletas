@@ -1,0 +1,31 @@
+
+> nef-nexus-crm@0.0.0 build
+> vite build
+
+[36mvite v5.4.21 [32mbuilding for production...[36m[39m
+transforming...
+[32mÔ£ô[39m 12 modules transformed.
+x Build failed in 431ms
+error during build:
+[vite:esbuild] Transform failed with 1 error:
+C:/Users/clire/OneDrive/├ürea de Trabalho/Sites/leadflow-crm-main/src/pages/Index.tsx:1562:17: ERROR: Expected identifier but found "/"
+file: C:/Users/clire/OneDrive/├ürea de Trabalho/Sites/leadflow-crm-main/src/pages/Index.tsx:1562:17
+
+Expected identifier but found "/"
+1560|  
+1561|  export default Index;
+1562|                  </li >
+   |                   ^
+1563|                </ul >
+1564|              </div >
+
+    at failureErrorWithLog (C:\Users\clire\OneDrive\├ürea de Trabalho\Sites\leadflow-crm-main\node_modules\esbuild\lib\main.js:1472:15)
+    at C:\Users\clire\OneDrive\├ürea de Trabalho\Sites\leadflow-crm-main\node_modules\esbuild\lib\main.js:755:50
+    at responseCallbacks.<computed> (C:\Users\clire\OneDrive\├ürea de Trabalho\Sites\leadflow-crm-main\node_modules\esbuild\lib\main.js:622:9)
+    at handleIncomingPacket (C:\Users\clire\OneDrive\├ürea de Trabalho\Sites\leadflow-crm-main\node_modules\esbuild\lib\main.js:677:12)
+    at Socket.readFromStdout (C:\Users\clire\OneDrive\├ürea de Trabalho\Sites\leadflow-crm-main\node_modules\esbuild\lib\main.js:600:7)
+    at Socket.emit (node:events:519:28)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at Readable.push (node:internal/streams/readable:390:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:191:23)
