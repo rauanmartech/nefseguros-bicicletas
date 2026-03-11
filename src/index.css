@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 90 40% 2%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 90 40% 2%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 90 40% 2%;
+
+    --primary: 97 96% 38%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 97 8% 95%;
+    --secondary-foreground: 90 40% 2%;
+
+    --muted: 97 8% 95%;
+    --muted-foreground: 97 10% 45%;
+
+    --accent: 97 71% 27%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 97 8% 90%;
+    --input: 97 8% 90%;
+    --ring: 97 96% 38%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 90 40% 2%;
+    --sidebar-primary: 97 96% 38%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 97 8% 96%;
+    --sidebar-accent-foreground: 90 40% 2%;
+    --sidebar-border: 97 8% 92%;
+    --sidebar-ring: 97 96% 38%;
+
+    --crm-green-dark: 97 40% 25%;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Manrope', sans-serif;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    background-image: url('./assets/logo-cropado.webp');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+@layer utilities {
+  .bg-grid-pattern {
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, hsl(var(--primary) / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--primary) / 0.05) 1px, transparent 1px);
+  }
+
+  .bg-dot-pattern {
+    background-size: 24px 24px;
+    background-image: radial-gradient(hsl(var(--primary) / 0.15) 1px, transparent 1px);
+  }
+
+  .bg-dot-pattern-light {
+    background-size: 24px 24px;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float 8s ease-in-out 3s infinite;
+  }
+
+  @keyframes float {
+    0% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-20px);
+    }
+
+    100% {
+      transform: translateY(0px);
+    }
+  }
+}
