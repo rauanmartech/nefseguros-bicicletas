@@ -151,9 +151,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col font-sans">
-      {/* Header - Barra Flutuante Arredondada */}
-      <header className="fixed top-0 left-0 w-full z-[100] transition-all duration-300 bg-black/60 backdrop-blur-xl border-b border-white/10">
-        <div className="container mx-auto px-6 py-4 flex items-center justify-between relative group">
+      {/* Header - Barra Flutuante Arredondada (Desktop) / Barra Fixa (Mobile) */}
+      <header className="fixed top-0 md:top-6 left-0 md:left-1/2 md:-translate-x-1/2 w-full md:w-[92%] md:max-w-7xl z-[100] transition-all duration-300 bg-black/60 md:bg-black/40 backdrop-blur-xl border-b md:border border-white/10 rounded-none md:rounded-3xl shadow-2xl shadow-black/50">
+        <div className="container mx-auto px-4 md:px-8 py-3 md:py-4 flex items-center justify-between relative">
           {/* Efeito de brilho no topo */}
           <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
 
@@ -199,35 +199,52 @@ const Index = () => {
                     <Menu className="w-6 h-6" />
                   </button>
                 </SheetTrigger>
-                <SheetContent side="right" className="w-full sm:max-w-md bg-gray-950/98 backdrop-blur-2xl border-none p-0 z-[110]">
-                  <div className="flex flex-col h-full bg-gradient-to-b from-gray-950 to-slate-900">
-                    <div className="p-6 border-b border-white/5 flex items-center justify-between">
-                      <img src={logo} alt="Nef Seguros" className="h-8 w-auto brightness-0 invert" />
-                      <SheetClose className="p-2 rounded-xl bg-white/5 text-white/60 hover:text-white hover:bg-white/10 transition-all">
-                        <X className="w-6 h-6" />
+                <SheetContent side="right" className="w-[85%] sm:max-w-md bg-stone-950/40 backdrop-blur-3xl border-l border-white/10 p-0 z-[110] shadow-[-20px_0_50px_rgba(0,0,0,0.5)]">
+                  <div className="flex flex-col h-[100dvh] relative overflow-hidden">
+                    {/* Futuristic Background Accents */}
+                    <div className="absolute top-[-10%] right-[-10%] w-64 h-64 bg-primary/20 blur-[100px] rounded-full pointer-events-none" />
+                    <div className="absolute bottom-[-5%] left-[-5%] w-48 h-48 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none" />
+                    
+                    <div className="sticky top-0 z-20 p-6 flex items-center justify-between bg-white/5 backdrop-blur-2xl border-b border-white/10">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center border border-primary/30 overflow-hidden p-1">
+                          <img 
+                            src={logoCropado} 
+                            alt="" 
+                            className="w-full h-full object-contain"
+                            style={{ filter: 'invert(53%) sepia(93%) saturate(461%) hue-rotate(98deg) brightness(98%) contrast(106%)' }} 
+                          />
+                        </div>
+                        <span className="text-white font-black tracking-tighter text-lg">NEF <span className="text-primary">SEGUROS</span></span>
+                      </div>
+                      <SheetClose className="p-2.5 rounded-xl bg-white/5 text-white/40 hover:text-white hover:bg-white/10 transition-all border border-white/5">
+                        <X className="w-5 h-5" />
                       </SheetClose>
                     </div>
 
-                    <nav className="flex-1 px-8 py-12">
-                      <div className="flex flex-col space-y-4">
+                    <nav className="flex-1 px-6 py-10 overflow-y-auto">
+                      <div className="flex flex-col space-y-2">
                         {[
-                          { name: "Início", href: "#inicio" },
-                          { name: "Riscos", href: "#riscos" },
-                          { name: "Modalidades", href: "#planos" },
-                          { name: "Coberturas", href: "#coberturas" },
-                          { name: "Diferenciais", href: "#sobre" },
-                          { name: "Especialista", href: "#consultor" },
-                          { name: "FAQ", href: "#faq" },
-                          { name: "Contratação", href: "#contato" }
+                          { name: "Início", href: "#inicio", icon: <Mountain className="w-4 h-4" /> },
+                          { name: "Riscos", href: "#riscos", icon: <AlertTriangle className="w-4 h-4" /> },
+                          { name: "Modalidades", href: "#planos", icon: <Bike className="w-4 h-4" /> },
+                          { name: "Coberturas", href: "#coberturas", icon: <ShieldCheck className="w-4 h-4" /> },
+                          { name: "Diferenciais", href: "#sobre", icon: <Zap className="w-4 h-4" /> },
+                          { name: "Especialista", href: "#consultor", icon: <Users className="w-4 h-4" /> },
+                          { name: "FAQ", href: "#faq", icon: <HelpCircle className="w-4 h-4" /> },
+                          { name: "Contratação", href: "#contato", icon: <Briefcase className="w-4 h-4" /> }
                         ].map((link, idx) => (
-                          <Reveal key={link.name} delay={idx * 50}>
+                          <Reveal key={link.name} delay={idx * 40}>
                             <SheetClose asChild>
                               <a
                                 href={link.href}
-                                className="flex items-center justify-between py-3 text-lg font-semibold text-white/60 hover:text-primary transition-all group border-b border-white/5"
+                                className="flex items-center gap-4 py-4 px-4 rounded-2xl text-base font-bold text-white/60 hover:text-white hover:bg-white/5 transition-all group border border-transparent hover:border-white/10"
                               >
+                                <span className="text-primary/40 group-hover:text-primary transition-colors">
+                                  {link.icon}
+                                </span>
                                 {link.name}
-                                <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-primary/50" />
+                                <ArrowRight className="w-4 h-4 ml-auto opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-primary" />
                               </a>
                             </SheetClose>
                           </Reveal>
@@ -235,18 +252,28 @@ const Index = () => {
                       </div>
                     </nav>
 
-                    <div className="p-8 border-t border-white/5 bg-black/40">
-                      <SheetClose asChild>
-                        <button
-                          onClick={() => setIsModalOpen(true)}
-                          className="w-full py-5 bg-primary text-white font-black text-lg rounded-2xl shadow-xl shadow-primary/30 active:scale-95 transition-transform"
-                        >
-                          SIMULAR AGORA
-                        </button>
-                      </SheetClose>
-                      <div className="mt-6 flex items-center justify-center gap-3 text-xs text-gray-500 font-bold uppercase tracking-[0.2em]">
-                        <ShieldCheck className="w-4 h-4 text-primary" />
-                        Segurança Nef Seguros
+                    <div className="sticky bottom-0 z-20 p-6 pt-2 bg-gradient-to-t from-stone-950 via-stone-950/95 to-transparent">
+                      <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-5 rounded-[2.5rem] shadow-2xl relative overflow-hidden group">
+                        {/* Interactive light beam */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                        
+                        <SheetClose asChild>
+                          <button
+                            onClick={() => setIsModalOpen(true)}
+                            className="w-full py-4 bg-primary text-white font-black text-base rounded-[1.8rem] shadow-[0_10px_30px_rgba(var(--primary-rgb),0.3)] hover:shadow-[0_15px_40px_rgba(var(--primary-rgb),0.5)] active:scale-[0.98] transition-all relative z-10 uppercase tracking-wider overflow-hidden"
+                          >
+                            <span className="relative z-10 flex items-center justify-center gap-2">
+                              SIMULAR AGORA
+                              <Zap className="w-4 h-4 fill-white" />
+                            </span>
+                          </button>
+                        </SheetClose>
+                        
+                        <div className="mt-4 flex items-center justify-center gap-2 text-[9px] text-white/30 font-black uppercase tracking-[0.3em] relative z-10">
+                          <div className="h-[1px] flex-1 bg-white/10" />
+                          <span>Tecnologia Nef</span>
+                          <div className="h-[1px] flex-1 bg-white/10" />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -258,7 +285,7 @@ const Index = () => {
       </header>
 
       {/* 1. Hero Section */}
-      <section id="inicio" className="relative overflow-hidden flex items-center min-h-screen">
+      <section id="inicio" className="relative overflow-hidden flex items-center min-h-screen md:min-h-0">
 
         {/* ── MOBILE HERO (< md) ── */}
         <div className="md:hidden w-full min-h-screen flex flex-col relative overflow-hidden bg-black">
@@ -305,7 +332,7 @@ const Index = () => {
                 </button>
                 <div className="flex items-center justify-center gap-2 text-[10px] text-gray-400 font-bold uppercase tracking-widest">
                   <Clock className="w-3.5 h-3.5 text-primary" />
-                  Gratuito • Menos de 2 min
+                  Leva menos de 2 minutos
                 </div>
               </div>
             </Reveal>
@@ -313,33 +340,61 @@ const Index = () => {
         </div>
 
         {/* ── DESKTOP HERO (≥ md) ── */}
-        <div className="hidden md:block absolute inset-0 z-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${heroBg})` }}>
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/95 via-gray-900/80 to-transparent z-0" />
+        <div className="hidden md:block absolute inset-0 z-0 bg-no-repeat bg-[length:100%_auto] lg:bg-cover bg-right-top lg:bg-right transition-all duration-1000" style={{ backgroundImage: `url(${heroBg})` }}>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent z-0" />
         </div>
-        <img src={logoCropado} alt="" className="hidden md:block absolute right-0 bottom-0 w-[600px] h-[600px] opacity-10 translate-x-1/4 translate-y-1/4 pointer-events-none z-0" />
-        <div className="hidden md:block container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-32 pb-20 lg:pt-48 lg:pb-32 mt-10">
-          <div className="max-w-4xl mx-auto text-white text-center">
-            <Reveal delay={100}>
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight">
-                Não deixe o medo roubar sua <span className="text-primary">paixão.</span>
-              </h1>
-            </Reveal>
-            <Reveal delay={200}>
-              <p className="text-xl md:text-2xl text-gray-200 mb-8 font-light leading-relaxed">
-                Proteja sua bicicleta e pedale com a liberdade que você merece. Descubra a proteção ideal com a consultoria personalizada de <span className="font-bold text-white">Rodrigo Campelo</span>.
-              </p>
-            </Reveal>
+        
+        <div className="hidden md:block container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-44 pb-6 lg:pt-56 lg:pb-8">
+          <div className="grid grid-cols-2 w-full">
+            <div className="text-white text-left">
+              <Reveal delay={100}>
+                <h1 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tight mb-6 leading-[1.05]">
+                  Não deixe o medo roubar sua <span className="text-primary">paixão.</span>
+                </h1>
+              </Reveal>
+              
+              <Reveal delay={200}>
+                <p className="text-lg md:text-xl text-gray-200 mb-8 font-medium leading-relaxed max-w-xl">
+                  Proteja sua bicicleta e pedale com a liberdade que você merece. Descubra a proteção ideal com a consultoria personalizada de <span className="font-bold text-white underline decoration-primary decoration-4 underline-offset-4">Rodrigo Campelo</span>.
+                </p>
+              </Reveal>
 
-            <Reveal delay={400}>
-              <div className="flex flex-col items-center gap-4">
-                <button onClick={() => setIsModalOpen(true)} className="inline-flex items-center justify-center px-12 py-5 text-xl font-black text-white transition-all bg-primary hover:bg-white hover:text-primary rounded-2xl shadow-xl shadow-primary/30 hover:-translate-y-1 w-full sm:w-auto uppercase tracking-tight">
-                  SIMULAR AGORA
-                </button>
-                <div className="flex items-center text-sm text-gray-400 font-bold uppercase tracking-widest">
-                  Gratuito • Simulação Real
+              {/* Bullets Restored for Desktop */}
+              <Reveal delay={300}>
+                <ul className="space-y-4 mb-10 text-left">
+                  {[
+                    "Consultoria Especializada Rodrigo Campelo", 
+                    "Proteção contra Roubo e Acidentes", 
+                    "Menos burocracia, mais segurança"
+                  ].map((point, index) => (
+                    <li key={index} className="flex items-center text-gray-100 font-bold text-lg">
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center mr-4 border border-primary/50">
+                        <Check className="w-4 h-4 text-primary" strokeWidth={4} />
+                      </span>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+
+              <Reveal delay={400}>
+                <div className="flex flex-col xl:flex-row xl:items-center gap-6">
+                  <button 
+                    onClick={() => setIsModalOpen(true)} 
+                    className="group inline-flex items-center justify-center px-8 py-5 text-lg font-black text-white transition-all bg-primary hover:bg-white hover:text-primary rounded-2xl shadow-xl shadow-primary/30 hover:-translate-y-1 uppercase tracking-tight w-full xl:w-auto"
+                  >
+                    SIMULAR AGORA E GARANTIR PROTEÇÃO
+                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                  <div className="flex items-center gap-3 text-sm text-gray-400 font-black uppercase tracking-[0.2em] whitespace-nowrap">
+                    <Clock className="w-5 h-5 text-primary" />
+                    Leva menos de 2 minutos
+                  </div>
                 </div>
-              </div>
-            </Reveal>
+              </Reveal>
+            </div>
+            {/* Right half is intentionally empty to let the background breathe */}
+            <div className="hidden lg:block" />
           </div>
         </div>
       </section>
@@ -607,7 +662,7 @@ const Index = () => {
           <Reveal delay={400}>
             <button
               onClick={() => setIsModalOpen(true)}
-              className="w-full py-4 bg-primary text-white font-extrabold rounded-2xl shadow-lg shadow-primary/20 active:scale-95 transition-transform"
+              className="w-full py-5 bg-primary hover:bg-white text-white hover:text-primary font-black text-base rounded-2xl shadow-xl shadow-primary/20 active:scale-95 transition-all duration-300 uppercase tracking-tight"
             >
               Quero proteger minha bicicleta
             </button>
@@ -650,9 +705,12 @@ const Index = () => {
               ))}
             </div>
             <div className="text-center">
-              <button onClick={() => setIsModalOpen(true)} className="inline-flex items-center text-primary font-semibold hover:text-primary/80 transition-colors group">
+              <button 
+                onClick={() => setIsModalOpen(true)} 
+                className="group inline-flex items-center justify-center px-10 py-5 text-lg font-black text-white transition-all bg-primary hover:bg-white hover:text-primary rounded-2xl shadow-xl shadow-primary/30 hover:-translate-y-1 uppercase tracking-tight"
+              >
                 Quero proteger minha bicicleta
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
@@ -714,7 +772,7 @@ const Index = () => {
           <Reveal delay={400}>
             <button
               onClick={() => setIsModalOpen(true)}
-              className="w-full py-4 bg-primary text-white font-extrabold rounded-2xl shadow-lg shadow-primary/20 active:scale-95 transition-transform"
+              className="w-full py-5 bg-primary hover:bg-white text-white hover:text-primary font-black text-base rounded-2xl shadow-xl shadow-primary/20 active:scale-95 transition-all duration-300 uppercase tracking-tight"
             >
               SIMULAR SEGURO AGORA
             </button>
@@ -851,13 +909,11 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Overlay Absoluto para o Rodapé (Botão) - Abaixado e Modernizado */}
             <div className="absolute bottom-0 left-0 right-0 z-20 pb-6 lg:pb-10 flex justify-center pointer-events-none">
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="group relative inline-flex items-center justify-center px-10 py-4 text-base font-extrabold text-white transition-all pointer-events-auto overflow-hidden rounded-full shadow-[0_10px_30px_rgba(34,197,94,0.3)] hover:shadow-primary/50"
+                className="group relative inline-flex items-center justify-center px-10 py-5 text-lg font-black text-white transition-all bg-primary hover:bg-white hover:text-primary rounded-2xl shadow-xl shadow-primary/30 hover:-translate-y-1 uppercase tracking-tight pointer-events-auto border-2 border-transparent hover:border-primary/10"
               >
-                <div className="absolute inset-0 bg-primary transition-all duration-300 group-hover:scale-110"></div>
                 <span className="relative flex items-center gap-2">
                   SIMULAR SEGURO AGORA
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -873,7 +929,7 @@ const Index = () => {
       </section>
 
       {/* 4. A Solução Definitiva (Diferenciais) */}
-      <section id="sobre" className="relative w-full scroll-mt-20 overflow-hidden">
+      <section id="sobre" className="relative w-full scroll-mt-20">
 
         {/* ── MOBILE DIFERENCIAIS (< md) ── */}
         <div className="md:hidden bg-slate-50 px-5 py-14">
@@ -1005,7 +1061,7 @@ const Index = () => {
 
 
       {/* 5. Depoimentos e Autoridade (Rodrigo Campelo) */}
-      <section id="consultor" className="scroll-mt-20 relative overflow-hidden">
+      <section id="consultor" className="scroll-mt-20 relative">
 
         {/* ── MOBILE CONSULTOR (< md) ── */}
         <div className="md:hidden bg-white px-5 py-14">
