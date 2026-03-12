@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
 import { CheckCircle2, Send, Bike, ShieldCheck, MapPin, Mail, Phone, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -6,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
+import logo from "../assets/logo.webp";
 
 const UFs = [
   'AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA',
@@ -59,17 +61,11 @@ const TesteForm = () => {
       setIsSuccess(true);
       toast.success("Lead de teste enviado com sucesso!");
       
-      // Reset form after a few seconds
       setTimeout(() => {
         setIsSuccess(false);
         setFormData({
-          nome: '',
-          whatsapp: '',
-          email: '',
-          cidade: '',
-          estado: '',
-          valor_bike: '',
-          tipo_pedal: ''
+          nome: '', whatsapp: '', email: '', cidade: '', estado: '',
+          valor_bike: '', tipo_pedal: ''
         });
       }, 5000);
 
@@ -83,20 +79,20 @@ const TesteForm = () => {
 
   if (isSuccess) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center p-4">
-        <div className="max-w-md w-full bg-white/5 backdrop-blur-xl border border-white/10 p-10 rounded-[2.5rem] shadow-2xl text-center space-y-6 animate-in zoom-in duration-300">
-          <div className="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-2 ring-4 ring-primary/10">
-            <CheckCircle2 className="w-12 h-12 text-primary" />
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 bg-grid-pattern">
+        <div className="max-w-md w-full bg-white border border-border p-10 rounded-[2.5rem] shadow-2xl text-center space-y-6 animate-in zoom-in duration-300">
+          <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-2 border border-primary/20">
+            <CheckCircle2 className="w-10 h-10 text-primary" />
           </div>
-          <h1 className="text-4xl font-extrabold text-white tracking-tight">Sucesso!</h1>
-          <p className="text-white/70 text-lg leading-relaxed">
-            Seu lead de teste foi enviado para o banco de dados. Verifique suas automações agora!
+          <h1 className="text-3xl font-black text-foreground tracking-tight">Sucesso!</h1>
+          <p className="text-muted-foreground text-lg leading-relaxed">
+            Seu lead de teste foi enviado para o CRM.
           </p>
           <Button 
             onClick={() => setIsSuccess(false)}
-            className="w-full h-14 bg-primary hover:bg-white hover:text-slate-950 text-white font-bold rounded-2xl transition-all shadow-lg shadow-primary/20"
+            className="w-full h-14 bg-primary hover:bg-crm-dark text-white font-black rounded-2xl transition-all shadow-lg"
           >
-            Enviar outro teste
+            Novo teste
           </Button>
         </div>
       </div>
@@ -104,153 +100,113 @@ const TesteForm = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-4 md:p-8 font-sans relative overflow-hidden">
-      {/* Decorative Orbs */}
-      <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-primary/20 blur-[120px] rounded-full"></div>
-      <div className="absolute bottom-[-10%] left-[-10%] w-[30%] h-[30%] bg-primary/10 blur-[100px] rounded-full"></div>
-      
-      <div className="max-w-2xl w-full relative z-10">
-        <div className="text-center mb-10 space-y-4">
-          <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 px-4 py-2 rounded-full mb-2">
-            <ShieldCheck className="w-4 h-4 text-primary" />
-            <span className="text-primary text-xs font-bold uppercase tracking-widest">Ambiente de Teste</span>
-          </div>
-          <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
-            Formulário de <span className="text-primary">Lead Teste</span>
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 bg-grid-pattern">
+      <div className="w-full max-w-lg space-y-8 animate-in fade-in duration-500">
+        <div className="text-center space-y-4">
+          <Link to="/" className="inline-block hover:scale-105 transition-transform mb-4">
+            <img src={logo} alt="Nef Seguros" className="h-10 w-auto" />
+          </Link>
+          <h1 className="text-4xl font-black text-foreground tracking-tighter">
+            Lead de <span className="text-primary italic">Teste</span>
           </h1>
-          <p className="text-white/60 text-lg max-w-lg mx-auto">
-            Use este formulário para enviar dados fictícios e testar o funcionamento das suas automações e do CRM.
+          <p className="text-muted-foreground font-medium text-sm px-4">
+            Envie dados reais de contato para validar suas automações.
           </p>
         </div>
 
-        <div className="bg-white/5 backdrop-blur-2xl border border-white/10 p-8 md:p-10 rounded-[2.5rem] shadow-2xl relative">
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2 col-span-full">
-              <Label htmlFor="nome" className="text-white/80 font-bold ml-1 flex items-center gap-2">
-                <User className="w-4 h-4" /> Nome Completo
-              </Label>
-              <Input
-                id="nome"
-                name="nome"
-                required
-                placeholder="Ex: Lead de Teste Silva"
-                value={formData.nome}
-                onChange={handleChange}
-                className="h-14 bg-white/10 border-white/20 focus:border-primary focus:ring-1 focus:ring-primary text-white placeholder:text-white/20 rounded-2xl transition-all"
-              />
-            </div>
+        <div className="bg-white border border-slate-200 p-8 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 gap-5">
+              <div className="space-y-2">
+                <Label htmlFor="nome" className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Nome Completo</Label>
+                <div className="relative">
+                  <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                  <Input id="nome" name="nome" required placeholder="Nome Fictício" value={formData.nome} onChange={handleChange} className="pl-11 h-12 bg-slate-50 border-slate-200 rounded-xl" />
+                </div>
+              </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="whatsapp" className="text-white/80 font-bold ml-1 flex items-center gap-2">
-                <Phone className="w-4 h-4" /> WhatsApp
-              </Label>
-              <Input
-                id="whatsapp"
-                name="whatsapp"
-                required
-                placeholder="Ex: 11988887777"
-                value={formData.whatsapp}
-                onChange={handleChange}
-                className="h-14 bg-white/10 border-white/20 focus:border-primary focus:ring-1 focus:ring-primary text-white placeholder:text-white/20 rounded-2xl transition-all"
-              />
-            </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="whatsapp" className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">WhatsApp Real</Label>
+                  <div className="relative">
+                    <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <Input id="whatsapp" name="whatsapp" required placeholder="11988887777" value={formData.whatsapp} onChange={handleChange} className="pl-11 h-12 bg-slate-50 border-slate-200 rounded-xl" />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">E-mail Real</Label>
+                  <div className="relative">
+                    <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <Input id="email" name="email" type="email" placeholder="teste@email.com" value={formData.email} onChange={handleChange} className="pl-11 h-12 bg-slate-50 border-slate-200 rounded-xl" />
+                  </div>
+                </div>
+              </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-white/80 font-bold ml-1 flex items-center gap-2">
-                <Mail className="w-4 h-4" /> Email
-              </Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="Ex: teste@example.com"
-                value={formData.email}
-                onChange={handleChange}
-                className="h-14 bg-white/10 border-white/20 focus:border-primary focus:ring-1 focus:ring-primary text-white placeholder:text-white/20 rounded-2xl transition-all"
-              />
-            </div>
+              <div className="grid grid-cols-3 gap-4">
+                <div className="col-span-2 space-y-2">
+                  <Label htmlFor="cidade" className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Cidade</Label>
+                  <Input id="cidade" name="cidade" required placeholder="Cidade" value={formData.cidade} onChange={handleChange} className="h-12 bg-slate-50 border-slate-200 rounded-xl" />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="estado" className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">UF</Label>
+                  <Select onValueChange={(v) => handleSelectChange('estado', v)} value={formData.estado}>
+                    <SelectTrigger className="h-12 bg-slate-50 border-slate-200 rounded-xl">
+                      <SelectValue placeholder="--" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {UFs.map(uf => <SelectItem key={uf} value={uf}>{uf}</SelectItem>)}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="cidade" className="text-white/80 font-bold ml-1 flex items-center gap-2">
-                <MapPin className="w-4 h-4" /> Cidade
-              </Label>
-              <Input
-                id="cidade"
-                name="cidade"
-                required
-                placeholder="Ex: São Paulo"
-                value={formData.cidade}
-                onChange={handleChange}
-                className="h-14 bg-white/10 border-white/20 focus:border-primary focus:ring-1 focus:ring-primary text-white placeholder:text-white/20 rounded-2xl transition-all"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="estado" className="text-white/80 font-bold ml-1 flex items-center gap-2">
-                <MapPin className="w-4 h-4" /> Estado (UF)
-              </Label>
-              <Select onValueChange={(v) => handleSelectChange('estado', v)} value={formData.estado}>
-                <SelectTrigger className="h-14 bg-white/10 border-white/20 text-white rounded-2xl focus:ring-primary">
-                  <SelectValue placeholder="Selecione UF" />
-                </SelectTrigger>
-                <SelectContent className="bg-slate-900 border-white/10 text-white">
-                  {UFs.map(uf => (
-                    <SelectItem key={uf} value={uf}>{uf}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="valor_bike" className="text-white/80 font-bold ml-1 flex items-center gap-2">
-                <Bike className="w-4 h-4" /> Valor da Bike (R$)
-              </Label>
-              <Input
-                id="valor_bike"
-                name="valor_bike"
-                type="number"
-                placeholder="Ex: 5000"
-                value={formData.valor_bike}
-                onChange={handleChange}
-                className="h-14 bg-white/10 border-white/20 focus:border-primary focus:ring-1 focus:ring-primary text-white placeholder:text-white/20 rounded-2xl transition-all"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="tipo_pedal" className="text-white/80 font-bold ml-1 flex items-center gap-2">
-                <Bike className="w-4 h-4" /> Tipo de Pedal
-              </Label>
-              <Select onValueChange={(v) => handleSelectChange('tipo_pedal', v)} value={formData.tipo_pedal}>
-                <SelectTrigger className="h-14 bg-white/10 border-white/20 text-white rounded-2xl focus:ring-primary">
-                  <SelectValue placeholder="Selecione o tipo" />
-                </SelectTrigger>
-                <SelectContent className="bg-slate-900 border-white/10 text-white">
-                  <SelectItem value="MTB / trilha">MTB / trilha</SelectItem>
-                  <SelectItem value="Estrada / speed">Estrada / speed</SelectItem>
-                  <SelectItem value="Urbano / deslocamento">Urbano / deslocamento</SelectItem>
-                  <SelectItem value="Gravel / misto">Gravel / misto</SelectItem>
-                </SelectContent>
-              </Select>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="valor_bike" className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Valor da Bike</Label>
+                  <div className="relative">
+                    <Bike className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <Input id="valor_bike" name="valor_bike" type="number" min="0" placeholder="0" value={formData.valor_bike} onChange={handleChange} className="pl-11 h-12 bg-slate-50 border-slate-200 rounded-xl" />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="tipo_pedal" className="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Modalidade</Label>
+                  <Select onValueChange={(v) => handleSelectChange('tipo_pedal', v)} value={formData.tipo_pedal}>
+                    <SelectTrigger className="h-12 bg-slate-50 border-slate-200 rounded-xl">
+                      <SelectValue placeholder="Selecione" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="MTB / trilha">MTB / trilha</SelectItem>
+                      <SelectItem value="Estrada / speed">Estrada / speed</SelectItem>
+                      <SelectItem value="Urbano / deslocamento">Urbano / deslocamento</SelectItem>
+                      <SelectItem value="Gravel / misto">Gravel / misto</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
             </div>
 
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="mt-4 h-16 bg-primary hover:bg-white hover:text-slate-950 text-white font-black text-xl rounded-2xl col-span-full transition-all duration-300 shadow-[0_15px_40px_rgba(34,197,94,0.3)] hover:shadow-white/20 disabled:opacity-50 group"
+              className="w-full h-14 bg-primary hover:bg-crm-dark text-white font-black rounded-2xl shadow-xl shadow-primary/20 transition-all duration-300 group mt-4 flex items-center justify-center gap-3"
             >
               {isSubmitting ? (
-                <span className="flex items-center gap-3">
-                  <svg className="animate-spin h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                <>
+                  <div className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                   ENVIANDO...
-                </span>
+                </>
               ) : (
-                <span className="flex items-center gap-3">
-                  ENVIAR LEAD TESTE <Send className="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </span>
+                <>
+                  ENVIAR TESTE <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                </>
               )}
             </Button>
           </form>
         </div>
+
+        <p className="text-center text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em]">
+          Ambiente de Validação Nef Seguros
+        </p>
       </div>
     </div>
   );
