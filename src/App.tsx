@@ -13,6 +13,7 @@ import LeadsBike from "./pages/LeadsBike";
 import Funil from "./pages/Funil";
 import FluxoCRM from "./pages/FluxoCRM";
 import Configuracoes from "./pages/Configuracoes";
+import TesteForm from "./pages/TesteForm";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => (
               <Route path="/configuracoes" element={<Configuracoes />} />
             </Route>
           </Route>
+          <Route path="/teste-leads" element={<TesteForm />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
