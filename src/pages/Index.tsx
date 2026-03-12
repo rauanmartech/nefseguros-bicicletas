@@ -1584,6 +1584,7 @@ const Index = () => {
                   <li><a href="#consultor" className="text-muted-foreground hover:text-primary transition-colors text-sm font-bold">Especialista</a></li>
                   <li><a href="#faq" className="text-muted-foreground hover:text-primary transition-colors text-sm font-bold">FAQ</a></li>
                   <li><Link to="/login" className="text-muted-foreground/60 hover:text-primary transition-colors text-xs font-semibold">Acesso Admin</Link></li>
+                  <li><Link to="/teste-leads" className="text-muted-foreground/20 hover:text-primary transition-colors text-[8px] font-medium opacity-20 hover:opacity-100 transition-opacity">Testar Leads</Link></li>
                 </ul>
               </div>
             </div>
